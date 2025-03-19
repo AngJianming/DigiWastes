@@ -113,7 +113,7 @@ const Poster = () => {
         </div>
         <div  className="postercard w-full h-fit  mt-[5vh] shadow-3xl rounded-xl p-[3vh]  other md:ml-5 mb-10 z-10 searchtext ">
           <h1 className="md:text-[5vh] text-[5vh] font-montserrat  font-bold">
-            Welcome To Echakran
+            Welcome To DigiWaste
           </h1>
           <p className=" text-gray-400 text-lg font-montserrat font-medium">
           In an effort to combat the growing issue of electronic waste (e-waste), our project is dedicated to responsible recycling and disposal. We provide convenient drop-off locations for old electronics, ensuring they are recycled or refurbished, reducing environmental impact and promoting a sustainable future.
