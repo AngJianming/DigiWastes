@@ -64,7 +64,7 @@ const Poster = () => {
     }
   }
 
-  const fadeDuration = 1.5; // Duration of fade-in/fade-out animation in seconds
+  const fadeDuration = 0; // Duration of fade-in/fade-out animation in seconds
 
   useEffect(() => {
     // Fade in the component
@@ -135,7 +135,7 @@ const Poster = () => {
               // onClick={() => {city ? navigate(`/search/${state}/${city}`) : (alert("Please select a city"))}}
               onClick={() => {navigate(`/search`)}}
             >
-              Locate Facility
+              Locate Reverse-Vending Machines
             </button>
           </div>
         </div>

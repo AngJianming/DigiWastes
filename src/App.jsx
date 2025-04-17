@@ -7,6 +7,7 @@ import {
 import {Navbar, Footer} from "./Components" ;
 import {Homepage , SearchMap ,Login , Explore , PricePred , SubExplore ,ItemExplore , Cart ,Profile} from "./Pages" ;
 import State from './context/State';
+import useState from 'react';
 
 const App = () => {
   return (

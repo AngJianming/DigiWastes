@@ -1,6 +1,6 @@
 import React from "react";
 import Wrapper from "./Wrapper";
-import Logo from "../assets/echakra.png";
+import Logo from "../assets/digiwasteslogo.png";
 import company from "../assets/buildings.png";
 import user from "../assets/programmer.png";
 import laptop from "../assets/laptop.png";
@@ -22,7 +22,7 @@ const Prodedure = () => {
           <div className="md:w-[20vw]  h-fit p-4 flex justify-center items-center rounded-xl font-montserrat font-bold">
             <img src={laptop} alt="logo" className="h-[8vh] z-10 md:h-[10vh]" />
           </div>
-          <div className="z-10 shadow-3xl bg-green-400 w-full md:w-[20vw] h-fit md:p-2 p-4 flex justify-center items-center rounded-xl font-montserrat font-bold">
+          <div className="z-10 shadow-3xl bg-[#01796f] w-full md:w-[20vw] h-fit md:p-2 p-4 flex justify-center items-center rounded-xl font-montserrat font-bold">
             <img src={Logo} alt="logo" className="h-[10vh] " />
           </div>
           <div className="md:w-[20vw] z-10  w-full spin h-fit p-4 flex justify-center items-center rounded-xl font-montserrat font-bold">

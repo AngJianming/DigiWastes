@@ -1,9 +1,9 @@
 import React from 'react'
 import Wrapper from './Wrapper'
-import Logo from "../assets/echakra.png";
+import Logo from "../assets/digiwasteslogo.png";
 import gsap from 'gsap';
 import { useState } from 'react';
-import {useContext } from 'react';
+import { useContext } from 'react';
 import Context from '../context/Context';
 import { useNavigate } from 'react-router-dom';
 import { BiCoinStack } from "react-icons/bi";
@@ -35,7 +35,7 @@ const Navbar = () => {
       <div className='justify-between items-center flex h-[15vh]'>
         {/* Logo */}
         <div className='flex gap-2 cursor-pointer' onClick={()=>navigate('/')}>
-        <img src={Logo} alt="logo" className='h-[20vh]'/>
+        <img src={Logo} alt="logo" className='h-[10vh]'/>
         </div>
         
         {/* <div className='absolute bg-red-400 w-fit'></div> */}

@@ -6,4 +6,4 @@ const Wrapper = ({children , classname}) => {
   )
 }
 
-export default Wrapper
+export default Wrapper;
