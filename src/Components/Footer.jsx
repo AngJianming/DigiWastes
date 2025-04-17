@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../assets/echakra.png";
+import Logo from "../assets/digiwasteslogo.png";
 
 const Footer = () => {
   return (

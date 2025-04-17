@@ -1,6 +1,6 @@
 import React from "react";
 import Wrapper from "./Wrapper";
-import Logo from "../assets/echakra.png";
+import Logo from "../assets/digiwasteslogo.png";
 import { CiSearch } from "react-icons/ci";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsHandbag} from "react-icons/bs";
