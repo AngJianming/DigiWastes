@@ -3,11 +3,11 @@ import Context from "../context/Context";
 import gsap from 'gsap';
 import Facilites from "./Facilites";
 import Loading from "./Loading";
-import poster from "../assets/postergif.gif";
-import posterlight from "../assets/Posterlightgif.gif";
+// import poster from "../assets/postergif.gif";
+// import posterlight from "../assets/Posterlightgif.gif";
 import bgdark from "../assets/homebg.png";
 import bg from "../assets/homebglight.png";
-import map from "../assets/MAP.gif" ;
+import map from "../assets/map.gif";
 import { useNavigate } from "react-router-dom";
 
 const Poster = () => {
@@ -93,9 +93,6 @@ const Poster = () => {
     };
   }, []);
 
-  
-
-
   return (
     <div>
       {isLoading ? <Loading /> : ""}
@@ -104,8 +101,9 @@ const Poster = () => {
         id="searchposter"
         // style={{backgroundImage : `url(${isdark ? (bgdark) : (bg)})` , backgroundSize : "cover"}}
       >
-        <div className="hidden absolute opacity-20 top-0 md:flex w-full max-h-[75vh] ">
+        <div className="hidden absolute opacity-70 top-0 md:flex w-full max-h-[75vh] ">
           <img
+            onmouseover={map}
             src={map}
             alt="MAP"
             className="max-h-[100vh] w-full object-cover rounded-xl"
@@ -141,11 +139,11 @@ const Poster = () => {
         </div>
         <div className="hidden md:flex w-full justify-center ">
           
-          <img
-            src={isdark ? (poster) : (posterlight)}
+          {/* <img
+            // src={isdark ? () : ()}
             alt=""
             className="h-[78vh] bg-cover bg-center "
-          />
+          /> */}
         </div>
       </div>
     </div>
