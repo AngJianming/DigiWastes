@@ -13,7 +13,7 @@ const Footer = () => {
 
         <div className="mt-5 md:flex justify-between items-center">
           <div className="flex gap-2 ">
-            <img src={Logo} alt="logo" className="h-[15vh]" />
+            <img src={Logo} alt="logo" className="h-[10vh]" />
           </div>
 
           <div>
@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
         <div className="flex  items-center justify-center mt-5">
           <h1 className="flex justify-center text-xl text-left   font-montserrat font-semibold gap-2">
-            Created by<span className="font-bold text-xl  font-montserrat text-[#ff5757]">DigiWaste</span>team
+            Created by<span className="font-bold text-xl  font-montserrat text-[#ff5757]">DigiWastes</span>Capstone Group G26
           </h1>
           </div>
       </div>
