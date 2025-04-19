@@ -6,8 +6,9 @@ import SA from "../assets/Ewaste_Category/Small_House_Appliances.jpg";
 import { useContext } from "react";
 import Context from "../context/Context";
 
-const category1 = [{
-    key : 1,
+const category1 = [
+  {
+    key: 1,
     name: "Information And Communication Equipment: ICT",
     image: ICT,
     items: [
@@ -221,8 +222,7 @@ const category1 = [{
 ];
 
 const Explore = () => {
-
-    const {category}  = useContext(Context)
+  const { category } = useContext(Context);
 
   return (
     <Wrapper>
@@ -252,9 +252,9 @@ const Explore = () => {
             cardid="4"
           />
         </div>
-        </div>
+      </div>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Explore
+export default Explore;
