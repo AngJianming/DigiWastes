@@ -64,7 +64,7 @@ const Poster = () => {
     }
   }
 
-  const fadeDuration = 0; // Duration of fade-in/fade-out animation in seconds
+  const fadeDuration = 1.5; // Duration of fade-in/fade-out animation in seconds
 
   useEffect(() => {
     // Fade in the component
