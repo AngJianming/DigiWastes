@@ -1,8 +1,8 @@
 import React from "react";
 import { Wrapper, CatCard } from "../Components";
-import ICT from "../assets/Ewaste_Category/ICT.jpg";
-import LA from "../assets/Ewaste_Category/LA.jpg";
-import SA from "../assets/Ewaste_Category/SA.jpg";
+import ICT from "../assets/Ewaste_Category/ICT_Devices.jpg";
+import LA from "../assets/Ewaste_Category/Large_House_Appliances.jpg";
+import SA from "../assets/Ewaste_Category/Small_House_Appliances.jpg";
 import { useContext } from "react";
 import Context from "../context/Context";
 
@@ -18,6 +18,9 @@ const category1 = [
       "Keyboards",
       "Printers",
       "TV sets",
+      "Smartphones",
+      "Tablets",
+      "Old Phones",
       "Video cameras",
     ],
   },
@@ -226,16 +229,28 @@ const Explore = () => {
       <h1 className="mt-[5vh] font-montserrat font-bold text-2xl ">
         Select Your Category
       </h1>
-      <div className="mt-[10vh] px-[5vw]">
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-[5vh]">
-          {category?.map((item) => (
-            <CatCard
-              image={item?.img}
-              name={item?.category}
-              key={item?._id}
-              link={`/explore/${item?.category}`}
-            />
-          ))}
+      <div className="mt-[10vh] px-[-1vw]">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-20">
+          <CatCard 
+            name="Small Household Appliances"
+            link="/small-appliances"
+            cardid="1"
+          />
+          <CatCard 
+            name="ICT Devices"
+            link="/ict"
+            cardid="2"
+          />
+          <CatCard 
+            name="Large Household Appliances"
+            link="/large-appliances"
+            cardid="3"
+          />
+          <CatCard 
+            name="Accessories"
+            link="/accessories"
+            cardid="4"
+          />
         </div>
       </div>
     </Wrapper>
