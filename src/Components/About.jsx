@@ -38,12 +38,12 @@ const About = () => {
 
 
   return (
-    <div className="z-10 flex flex-col gap-10 md:px-[20vh] px-2 mt-[15vh]" id="about">
-      <h1 className="mb-[10vh] font-montserrat font-bold text-2xl text-center">
-          About Us 
+    <div className="z-10 flex flex-col gap-12 md:px-[30vh] px-6 mt-[30vh]" id="about">
+      <h1 className="mb-[3vh] font-montserrat font-bold text-2xl text-center">
+          About Us
         </h1>
       <div id="searchposter" className="flex md:flex-row flex-col gap-10 md:justify-between">
-        <div  className="md:max-w-[27vw] w-fit min-h-[30vh] rounded-lg shadow-3xl bg-[#222222] card">
+        <div  className="md:max-w-[27vw] w-fit min-h-[30vh] rounded-lg shadow-3xl bg-[#333] card transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.9)]">
           <div className="flex justify-center mt-2 ">
             <img
               src={bestprice}
@@ -54,11 +54,11 @@ const About = () => {
           <h1 className="text-xl font-montserrat font-medium text-center mt-5">
             Best Price
           </h1>
-          <p className="py-4 px-6 text-md font-montserrat text-gray-400">
+          <p className="py-4 px-6 text-md font-montserrat text-gray-400 text-justify">
           Determine the value of your e-waste items effortlessly using our "Best Price" feature. By inputting item details, such as make and condition, you'll receive an accurate estimate before recycling. We take pride in offering competitive rates, ensuring you get the highest return for your electronics
           </p>
         </div>
-        <div   className="md:max-w-[27vw] w-fit min-h-[30vh] rounded-lg shadow-3xl bg-[#222222] card">
+        <div   className="md:max-w-[27vw] w-fit min-h-[30vh] rounded-lg shadow-3xl bg-[#333] card transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.9)]">
           <div className="flex justify-center mt-2 ">
             <img
               src={education}
@@ -69,14 +69,14 @@ const About = () => {
           <h1 className="text-xl font-montserrat font-medium text-center mt-5">
             Education
           </h1>
-          <p className="py-4 px-6 text-md font-montserrat text-gray-400">
+          <p className="py-4 px-6 text-md font-montserrat text-gray-400 text-justify">
             {" "}
             Explore our extensive "Education" section to gain insights into responsible e-waste disposal. We provide comprehensive resources, including articles and guides, to help you understand the environmental impact of e-waste and the importance of recycling.
           </p>
         </div>
       </div>
       <div className="flex md:flex-row flex-col gap-10 md:justify-between">
-        <div  className="md:max-w-[27vw] w-fit min-h-[30vh] rounded-lg shadow-3xl bg-[#222222] card">
+        <div  className="md:max-w-[27vw] w-fit min-h-[30vh] rounded-lg shadow-3xl bg-[#333] card transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.9)]">
           <div className="flex justify-center mt-2 ">
             <img
               src={pricecomp}
@@ -87,23 +87,23 @@ const About = () => {
           <h1 className="text-xl font-montserrat font-medium text-center mt-5">
             Price Comparison Tool
           </h1>
-          <p className="py-4 px-6 text-md font-montserrat text-gray-400">
+          <p className="py-4 px-6 text-md font-montserrat text-gray-400 text-justify">
             {" "}
             Make well-informed recycling decisions with our "Price Comparison Tool." Easily compare our competitive recycling rates with local competitors to ensure transparency and select the most financially advantageous recycling option. 
           </p>
         </div>
-        <div  className="md:max-w-[27vw] w-fit min-h-[30vh] rounded-lg shadow-3xl bg-[#222222] card">
+        <div  className="md:max-w-[27vw] w-fit min-h-[30vh] rounded-lg shadow-3xl bg-[#333] card transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.9)]">
           <div className="flex justify-center mt-2 ">
             <img
               src={reward}
               alt="thunder"
               className="h-[7vh] p-2 shadow-3xl bg-[#1A1A1A]"
             />
-          </div>
+          </div>  
           <h1 className="text-xl font-montserrat font-medium text-center mt-5">
             Rewards 
           </h1>
-          <p className="py-4 px-6 text-md font-montserrat text-gray-400">
+          <p className="py-4 px-6 text-md font-montserrat text-gray-400 text-justify">
             {" "}
             Participate in our "Rewards" program and earn points, bonuses, and rewards with every recycling effort. These rewards can be redeemed for valuable items, discounts, or gift cards, offering tangible benefits for your eco-friendly actions. 
           </p>

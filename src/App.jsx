@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
 } from "react-router-dom";
 import {Navbar, Footer} from "./Components" ;
 import {Homepage , SearchMap ,Login , Explore , PricePred , SubExplore ,ItemExplore , Cart ,Profile} from "./Pages" ;
@@ -16,6 +17,7 @@ const App = () => {
       <Router>
         <Navbar/>
         <Routes>
+          <Route exact path="/DigiWaste/" element={<Homepage/>} />
           <Route exact path="/" element={<Homepage/>} />
           <Route exact path="/search" element={<SearchMap/>} />
           <Route exact path="/login" element={<Login/>} />
@@ -35,3 +37,16 @@ const App = () => {
 }
 
 export default App
+
+// const Root = () => {
+//   //Check if token cause in localStorage
+//   const isAuthenticated = !!localStorage.getItem("token");
+
+//   //Redirect the platform to router
+//   return isAuthenticated ? {  
+//     <Navigate to="/dashboard" />
+//   } : {
+//     <Navigate to="/login" />
+//   };
+
+// };
