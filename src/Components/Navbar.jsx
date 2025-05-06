@@ -27,8 +27,6 @@ const Navbar = () => {
     }
   }
 
-  
-
   return (
     <div className='shadow-3xl '>
     <Wrapper>
@@ -52,7 +50,7 @@ const Navbar = () => {
             </li>
             <li
               className="font-semibold font-montserrat hover:text-[#01796f] cursor-pointer nav"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/market")}
             >
               <a>Market</a>
             </li>
@@ -72,8 +70,8 @@ const Navbar = () => {
             </li>
             <li
               className="font-semibold font-montserrat hover:text-[#01796f] cursor-pointer nav"
-              onClick={()=>document.getElementById("contact").scrollIntoView({behavior:"smooth"})}
-              
+              // onClick={()=>document.getElementById("contact").scrollIntoView({behavior:"smooth"})}
+              onClick={()=>navigate("/contact")}
             >
               <a>Contact</a>
             </li>
@@ -95,13 +93,13 @@ const Navbar = () => {
         
         </div>
         <div className='md:flex hidden gap-[5vh] items-center'>
-          {!Location ? (<h1 className=' font-montserrat font-bold text-red-400 flex items-center gap-[1vh]'><i class="fi fi-rr-marker"></i>Location</h1>) : (<h1 className=' font-montserrat font-bold text-red-400 flex items-center gap-[1vh]'><i class="fi fi-rr-marker"></i>{Location}</h1>)}
+          {!Location ? (<h1 className=' font-montserrat font-bold text-red-400 flex items-center gap-[1vh]'><i class=""></i></h1>) : (<h1 className=' font-montserrat font-bold text-red-400 flex items-center gap-[1vh]'><i class="fi fi-rr-marker"></i>{Location}</h1>)}
           
         {!sessionStorage.getItem("user") ? (<div className='md:flex hidden gap-[5vh]'>
         <button
               className="shadow-3xl font-medium border-2 font-poppins px-4 py-2 bg-[#222222] rounded-md hover:bg-[#01796f]  transition-transform nav"
               onClick={() => {setislogin(true);
-                navigate("/login")}}
+                navigate("/DigiWaste/login")}}
             >
               Login
             </button>

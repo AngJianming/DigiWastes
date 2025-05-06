@@ -1,5 +1,5 @@
 import React , {useEffect , useContext} from 'react'
-import {Wrapper , Poster , About , Prodedure , Contact, Popup} from "../Components" ;
+import {Wrapper , Poster , About , Prodedure , Contact, /*Popup*/} from "../Components" ;
 import gsap from 'gsap';
 import map from "../assets/garbage-truck.png";
 import Context from '../context/Context';
@@ -76,13 +76,14 @@ const Homepage = () => {
 
   return (
     <Wrapper>
-      {ispopup ? <Popup/> : null}
+      {/* {ispopup ? <Popup/> : null} */}
       <Poster/>
-      <div className="hidden md:flex w-full fixed bottom-[-4vh]  z-40  garbagetruck">
+        <div className="hidden md:flex w-full fixed bottom-[-4vh]  z-40  garbagetruck">
           <img
             src={map}
-            alt=""
-            className="h-[20vh] bg-cover bg-center rounded-xl"
+            alt="Nav to locate reverse vending machine"
+            className="h-[20vh] bg-cover bg-center rounded-xl cursor-pointer hover:scale-105 transition-transform"
+            onClick={() => navigate('/search')}
           />
         </div>
       <About/>

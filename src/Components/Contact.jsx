@@ -13,7 +13,7 @@ const Contact = () => {
             Contact our Team
           </h1>
           <p className=" text-gray-400 text-lg font-montserrat font-medium">
-            Fill up the Details given below and click on the submit
+            Fill up any inquries given below and click on the submit
           </p>
 
           <div className="mt-10 flex flex-col gap-5">
@@ -56,7 +56,7 @@ const Contact = () => {
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
-                  placeholder="Enter Your Name"
+                  placeholder="Enter Your Feedback"
                 />
               </div>
             <button

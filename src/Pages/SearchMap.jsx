@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import mapboxgl, { Marker } from "mapbox-gl";
+// import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import polyline from "@mapbox/polyline";
 import { useContext } from "react";
 import Context from "../context/Context";
@@ -10,41 +11,36 @@ import { set } from "mongoose";
 const SearchMap = () => {
   const { Location, Locationstate, facdata, fetcheddata } = useContext(Context);
   const [map, setmap] = useState(null);
-  const [coordinates, setCoordinates] = useState([]);
+  const [coordinates, setCoordinates] = useState([101.700643, 3.055274]); // APU coordinates
   const [marker, setmarker] = useState(null);
   const [searchaddress, setsearchaddress] = useState("");
   const [initaddress, setinitaddress] = useState("");
 
   // Create a function to initialize the map
   const initializeMap = (coordinates1) => {
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoibmlzaGFudDc0MTIiLCJhIjoiY2xtYm42NHI5MWN0ZTNkbzVsdzhkNnl0bSJ9.FXHqQifsNwqwWW3g4qEZgw";
+    mapboxgl.accessToken = import.meta.env.MAPBOX_ACCESS_TOKEN;
 
     const map = new mapboxgl.Map({
       container: "map", // Use the provided coordinates as the initial center
       style: "mapbox://styles/nishant7412/clmd5l4yi01bz01r71roa6h2m",
+      center: coordinates, // Center on APU
       zoom: 18,
       pitch: 50,
       bearing: 0,
     });
 
     return map;
-    // Rest of your map initialization code...
   };
 
   const Geocodeaddress = async (address) => {
     console.log(address);
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoibmlzaGFudDc0MTIiLCJhIjoiY2xtYm42NHI5MWN0ZTNkbzVsdzhkNnl0bSJ9.FXHqQifsNwqwWW3g4qEZgw";
+    mapboxgl.accessToken = import.meta.env.MAPBOX_ACCESS_TOKEN;
     const geocodingApiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${mapboxgl.accessToken}`;
     const response = await fetch(geocodingApiUrl);
     const data = await response.json();
 
-    const coordinates = data.features[0].center;
+    return data.features[0].center;
 
-    console.log(coordinates);
-
-    return coordinates;
   };
 
   // Handle the search button click

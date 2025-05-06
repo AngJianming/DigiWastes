@@ -106,7 +106,8 @@ const Poster = () => {
             onmouseover={map}
             src={map}
             alt="MAP"
-            className="max-h-[100vh] w-full object-cover rounded-xl"
+            className="max-h-[100vh] w-full object-cover rounded-xl cursor-pointer hover:scale-105 transition-transform"
+            onClick={() => navigate('/DigiWaste/search')}
           />
         </div>
         <div  className="postercard w-full h-fit  mt-[5vh] shadow-3xl rounded-xl p-[3vh]  other md:ml-5 mb-10 z-10 searchtext ">
@@ -131,7 +132,7 @@ const Poster = () => {
             <button
               className="hover:bg-[#01796f] hover:scale-105 shadow-3xl transition-transform  font-montserrat font-semibold p-4 rounded-lg  w-fit"
               // onClick={() => {city ? navigate(`/search/${state}/${city}`) : (alert("Please select a city"))}}
-              onClick={() => {navigate(`/search`)}}
+              onClick={() => {navigate(`/DigiWaste/search`)}}
             >
               Locate Reverse-Vending Machines
             </button>

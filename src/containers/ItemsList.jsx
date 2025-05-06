@@ -2,9 +2,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ItemAdmin from '../components/ItemAdmin'
-import Footer from '../components/Footer'
+import Footer from '../../components/Footer'
 import HeaderAdmin from '../components/HeaderAdmin'
-import Loading from '../components/Loading'
+import Loading from '../../components/Loading'
 import { fetchApprovedItems } from '../actions/ticketActions'
 
 
