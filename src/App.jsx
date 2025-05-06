@@ -5,10 +5,14 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import {Navbar, Footer} from "./Components" ;
+import {Navbar, Footer, InfoForm} from "./Components" ;
 import {Homepage , SearchMap ,Login , Explore , PricePred , SubExplore ,ItemExplore , Cart ,Profile} from "./Pages" ;
 import State from './context/State';
 import useState from 'react';
+import MarketPlace from './Components/MarketPlace';
+import ContactUs from './Pages/ContactUs';
+// import ContactUs from './Pages/AboutUs';
+// import ContactUs from './Pages/Education';
 
 const App = () => {
   return (
@@ -17,10 +21,11 @@ const App = () => {
       <Router>
         <Navbar/>
         <Routes>
+          {/* Route to change your page when navbar or footer want to nav to a diff page */}
           <Route exact path="/DigiWaste/" element={<Homepage/>} />
           <Route exact path="/" element={<Homepage/>} />
-          <Route exact path="/search" element={<SearchMap/>} />
-          <Route exact path="/login" element={<Login/>} />
+          <Route exact path="/DigiWaste/search" element={<SearchMap/>} />
+          <Route exact path="/DigiWaste/login" element={<Login />} />
           <Route exact path="/register" element={<Login/>} />
           <Route exact path="/explore" element={<Explore/>} />
           <Route exact path="/explore/:category" element={<SubExplore/>} />
@@ -28,6 +33,11 @@ const App = () => {
           <Route exact path="/pricepredict" element={<PricePred/>} />
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/profile" element={<Profile/>} />
+          <Route path="/market" element={<MarketPlace />} />
+          {/* <Route path="/aboutus" element={<AboutUs />} /> */}
+          {/* <Route path="/edu" element={<Education />} /> */}
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/sell" element={<InfoForm />} />
         </Routes>
         <Footer/>
       </Router>

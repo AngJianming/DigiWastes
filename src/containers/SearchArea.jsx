@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Item from "../components/Item";
-import Footer from "../components/Footer";
+import Footer from "../../components/Footer";
 import Header from "../components/Header";
-import Loading from "../components/Loading";
+import Loading from "../../components/Loading";
 import NoSearchResultsHint from "../components/NoSearchResultsHint";
 import BinDescription from "../components/BinDescription";
 

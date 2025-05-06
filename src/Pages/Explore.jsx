@@ -238,7 +238,7 @@ const Explore = () => {
           />
           <CatCard 
             name="ICT Devices"
-            link="/ict"
+            link="/market"
             cardid="2"
           />
           <CatCard 

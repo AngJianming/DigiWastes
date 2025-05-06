@@ -40,7 +40,7 @@ const About = () => {
   return (
     <div className="z-10 flex flex-col gap-12 md:px-[30vh] px-6 mt-[30vh]" id="about">
       <h1 className="mb-[3vh] font-montserrat font-bold text-2xl text-center">
-          About Us
+          What we offer...
         </h1>
       <div id="searchposter" className="flex md:flex-row flex-col gap-10 md:justify-between">
         <div  className="md:max-w-[27vw] w-fit min-h-[30vh] rounded-lg shadow-3xl bg-[#333] card transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.9)]">

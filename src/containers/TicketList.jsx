@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import Ticket from '../components/Ticket'
-import Footer from '../components/Footer'
-import HeaderAdmin from '../components/HeaderAdmin'
 import { connect } from 'react-redux'
-import Loading from "../components/Loading"
-import { fetchTickets } from '../actions/ticketActions'
+// Update these paths to match your project structure
+import Ticket from '../../Components/Ticket'
+import Footer from '../../Components/Footer'
+import HeaderAdmin from '../../Components/HeaderAdmin'
+import Loading from "../../Components/Loading"
+import { fetchTickets } from '../../actions/ticketActions'
 
 
 // corresponding style file: _ticketList.scss

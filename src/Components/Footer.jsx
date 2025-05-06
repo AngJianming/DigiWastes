@@ -26,6 +26,12 @@ const Footer = () => {
             </li>
             <li
               className="font-semibold font-montserrat  hover:text-[#ff5757] cursor-pointer"
+              onClick={() => navigate("/market")}
+            >
+              <a>Market |</a>
+            </li>
+            <li
+              className="font-semibold font-montserrat  hover:text-[#ff5757] cursor-pointer"
               onClick={()=>document.getElementById("about").scrollIntoView({behavior:"smooth"})}
             >
               <a>About |</a>
@@ -47,7 +53,7 @@ const Footer = () => {
         </div>
         <div className="flex  items-center justify-center mt-5">
           <h1 className="flex justify-center text-xl text-left   font-montserrat font-semibold gap-2">
-            Created by<span className="font-bold text-xl  font-montserrat text-[#ff5757]">DigiWastes</span>Capstone Group G26
+            Created by<span className="font-bold text-xl  font-montserrat text-[#00b77f]">DigiWastes</span>Capstone Group G26
           </h1>
           </div>
       </div>

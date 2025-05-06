@@ -93,17 +93,17 @@ const Login = () => {
   return (
     <Wrapper>
       {loading && <Loading />}
-      <div className="flex py-4 md:px-[8vw] justify-center ">
-        <div className="w-[80vw] h-[85vh]  z-10 md:flex hidden">
-          <img
+      <div className="flex py-12 gap-x-10 md:px-[8vw] justify-end ">
+        <div className="w-full h-full z-10 md:flex hidden items-center">
+          <img 
             src={isdark ? poster : posterlight}
             alt=""
-            className=" object-cover  "
+            className=""
           />
         </div>
 
         {/* Login Cred */}
-        {islogin ? (<div className="auth w-full h-fit flex flex-col items-center shadow-3xl p-[5vh]  rounded-xl">
+        {islogin ? (<div className="auth p-[5vh] w-full h-fit flex flex-col items-center shadow-3xl p-3 rounded-xl">
           <div>
             <h1 className="mt-[5vh] font-montserrat font-bold text-3xl ">
               Welcome back!
@@ -155,7 +155,7 @@ const Login = () => {
               className="text-md w-full font-poppins font-medium  shadow-3xl p-3 rounded-xl hover:bg-[#01796f] hover:scale-105 transition-transform"
               onClick={() => login()}
             >
-              Log in
+              Login
             </button>
             <button className="text-md flex items-center justify-center gap-[2vh] w-full font-poppins font-medium  shadow-3xl p-3 rounded-xl hover:bg-red-400 hover:scale-105 transition-transform">
               <FcGoogle /> Log in with Google
