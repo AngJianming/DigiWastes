@@ -11,8 +11,9 @@ import State from './context/State';
 import useState from 'react';
 import MarketPlace from './Components/MarketPlace';
 import ContactUs from './Pages/ContactUs';
-// import ContactUs from './Pages/AboutUs';
-// import ContactUs from './Pages/Education';
+import AboutUs from './Pages/AboutUs';
+import EducationDocs from './Pages/EducationDocs';
+//import { useRouter } from './router';
 
 const App = () => {
   return (
@@ -34,10 +35,12 @@ const App = () => {
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/profile" element={<Profile/>} />
           <Route path="/market" element={<MarketPlace />} />
-          {/* <Route path="/aboutus" element={<AboutUs />} /> */}
-          {/* <Route path="/edu" element={<Education />} /> */}
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/education" element={<EducationDocs />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/sell" element={<InfoForm />} />
+          {/* <Route path="/" element={<DashboardPage/>} /> */}
+          {/* <Route path="/analytics" element={<AnalyticsPage/>} /> */}
         </Routes>
         <Footer/>
       </Router>
