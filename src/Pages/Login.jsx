@@ -19,6 +19,8 @@ const Login = () => {
   const [Username, setUsername] = useState("");
   const navigate = useNavigate();
   const [loading, setloading] = useState(false);
+  const router = useRouter();
+  const baseURL = process.env.NEXT_PUBLIC_HOSTNAME + "register";
 
   useEffect(() => {
     gsap.fromTo(".auth", {x:400 , opacity : 0},{x : 0 , opacity: 100 , duration : 2 , ease : "power3.out" , stagger : 0.25});
