@@ -18,6 +18,9 @@ export default function ProTip() {
       {'Pro tip: See more '}
       <Link href="https://mui.com/material-ui/getting-started/templates/">templates</Link>
       {' in the Material UI documentation.'}
+      <Link href="">documents</Link>
+      <Link href="">about us</Link>
+      <Link href="">contact us</Link>
     </Typography>
   );
 }
