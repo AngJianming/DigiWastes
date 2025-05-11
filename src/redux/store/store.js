@@ -1,7 +1,14 @@
-import {configureStore} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import settingsReducer from "../state-slice/settings-slice";
 
+const store = configureStore({
+    reducer: {
+        settings: settingsReducer
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false
+        })
+});
 
-export default configureStore({
-    reducer:{settings:settingsReducer}
-})
+export default store;

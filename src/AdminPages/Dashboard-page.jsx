@@ -1,7 +1,7 @@
 import React, {Fragment,Suspense,lazy} from 'react';
-import MasterLayout from "./components/masterLayout/Master-Layout";
-import LazyLoader from "./components/masterLayout/lazyLoader";
-const Dashboard =lazy(() => import('./components/Dashboard/Dashboard'));
+import MasterLayout from "./masterLayout/Master-Layout";
+import LazyLoader from "./masterLayout/lazyLoader";
+const Dashboard =lazy(() => import('./Dashboard/Dashboard'));
 const DashboardPage = () => {
     return (
         <Fragment>
@@ -15,3 +15,4 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
+// Compare this snippet from src/AdminPages/Analytics-page.jsx:
