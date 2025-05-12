@@ -15,10 +15,17 @@ export default defineConfig(({ command, mode }) => {
     server: {
       port: 3000,
       open: true,
+      host: true
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        target: 'es2020'
+      }
     },
     build: {
       outDir: 'dist',
       sourcemap: true,
+      target: 'es2020'
     }
   }
 })

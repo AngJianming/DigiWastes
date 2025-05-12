@@ -13,14 +13,23 @@ import { useEffect } from "react";
 import { set } from "mongoose";
 
 const Login = () => {
-  const { isdark , islogin, setislogin , setUser } = useContext(Context);
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [Username, setUsername] = useState("");
+  const { isdark, islogin, setislogin, setUser } = useContext(Context);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [loading, setloading] = useState(false);
-  const router = useRouter();
-  const baseURL = process.env.NEXT_PUBLIC_HOSTNAME + "register";
+
+  // Check if user is already logged in
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    if (token && user) {
+      setUser(JSON.parse(user));
+      setislogin(true);
+      navigate('/');
+    }
+  }, []);
 
   useEffect(() => {
     gsap.fromTo(".auth", {x:400 , opacity : 0},{x : 0 , opacity: 100 , duration : 2 , ease : "power3.out" , stagger : 0.25});
@@ -44,12 +53,16 @@ const Login = () => {
         );
 
         const data = await res.json();
-        console.log(data?.user);
         setloading(false);
         if (data?.message === "Authentication successful") {
           setUser(data?.user);
           sessionStorage.setItem("user", data?.user?._id);
-          navigate("/");
+          // Check if user is admin
+          if (data.user.isAdmin) {
+            navigate("/admin/dashboard"); // Navigate to admin dashboard
+          } else {
+            navigate("/"); // Navigate to regular user home
+          }
         } else {
           alert("Invalid Credentials");
         }

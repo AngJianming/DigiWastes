@@ -8,7 +8,7 @@ import db from "../config/db.js";
 import { ObjectId } from 'mongodb';
 
 // use this to define routes
-// routes will be added as a middleware & will take control of requests starting with path /
+// routes will be added as a middleware & will take control of requests starting with path /record
 const router = express.Router();
 
 // to get list of all records

@@ -19,7 +19,7 @@ const Contact = () => {
           <div className="mt-10 flex flex-col gap-5">
             <div className="md:flex  md:gap-5">
               <div className="relative">
-                <p className="font-montserrat font-semibold ">
+                <p className="font-montserrat font-semibold md:mt-0 mt-0 ">
                   Email
                 </p>
                 <input
@@ -33,7 +33,7 @@ const Contact = () => {
               </div>
               {/* Dropdown state */}
               <div className="relative">
-                <p className="font-poppins font-semibold md:mt-0 mt-5 ">
+                <p className="font-poppins font-semibold md:mt-0 mt-0 ">
                   Name
                 </p>
                 <input
@@ -47,7 +47,7 @@ const Contact = () => {
               </div>
             </div>
             <div className="relative">
-                <p className="font-poppins font-semibold md:mt-0 mt-5 ">
+                <p className="font-poppins font-semibold md:mt-0 mt-0 ">
                   Description
                 </p>
                 <input
