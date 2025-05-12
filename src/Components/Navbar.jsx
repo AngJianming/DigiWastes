@@ -11,10 +11,15 @@ import { GrLocation } from "react-icons/gr";
 import { useEffect } from 'react';
 const Navbar = () => {
 
-  const {isdark , setisdark , setislogin , Location} = useContext(Context)
+  const { isdark, setisdark, islogin, User, logout, Location } = useContext(Context);
   
   const navigate = useNavigate();
   const body = document.body;
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   const modetoggle=()=>{
     if(body.classList.contains("light")){
@@ -56,14 +61,16 @@ const Navbar = () => {
             </li>
             <li
               className="font-semibold font-montserrat  hover:text-[#01796f] cursor-pointer nav"
-              onClick={()=>document.getElementById("about").scrollIntoView({behavior:"smooth"})}
+              onClick={() => navigate("/aboutus")}
+              // {()=>document.getElementById("/aboutus").scrollIntoView({behavior:"smooth"})}
               
             >
               <a>About</a>
             </li>
             <li
               className="font-semibold font-montserrat hover:text-[#01796f] cursor-pointer nav"
-              onClick={()=>document.getElementById("contact").scrollIntoView({behavior:"smooth"})}
+              onClick={() => navigate("/education")}
+              // {()=>document.getElementById("contact").scrollIntoView({behavior:"smooth"})}
               
             >
               <a>Education</a>
@@ -95,23 +102,62 @@ const Navbar = () => {
         <div className='md:flex hidden gap-[5vh] items-center'>
           {!Location ? (<h1 className=' font-montserrat font-bold text-red-400 flex items-center gap-[1vh]'><i class=""></i></h1>) : (<h1 className=' font-montserrat font-bold text-red-400 flex items-center gap-[1vh]'><i class="fi fi-rr-marker"></i>{Location}</h1>)}
           
-        {!sessionStorage.getItem("user") ? (<div className='md:flex hidden gap-[5vh]'>
-        <button
-              className="shadow-3xl font-medium border-2 font-poppins px-4 py-2 bg-[#222222] rounded-md hover:bg-[#01796f]  transition-transform nav"
-              onClick={() => {setislogin(true);
-                navigate("/DigiWaste/login")}}
+        {!islogin ? (
+          <div className='md:flex hidden gap-[5vh]'>
+            <button
+              className="shadow-3xl font-medium border-2 font-poppins px-4 py-2 bg-[#222222] rounded-md hover:bg-[#01796f] transition-transform nav"
+              onClick={() => navigate("/login")}
             >
               Login
             </button>
-        </div>) :(
-          <div className='md:flex hidden gap-[2vh]'>
+          </div>
+        ) : (
+          <div className='md:flex hidden gap-[2vh] items-center'>
             <button
               className="shadow-5xl font-medium font-poppins hover:text-[#01796f] transition-transform nav"
-              onClick={()=>{navigate('/cart')}}
+              onClick={() => navigate('/cart')}
             >
-              <i class="fi fi-rr-shopping-cart"></i>
+              <i className="fi fi-rr-shopping-cart"></i>
             </button>
-            <button className=' font-medium  font-poppins px-4 py-2 bg-[#222222] rounded-md hover:bg-[#01796f]  transition-transform nav' onClick={()=>{navigate("/profile")}}><i class="fi fi-sr-user"></i></button>
+            
+            <div className="relative group">
+              <button className='font-medium font-poppins px-4 py-2 bg-[#222222] rounded-md hover:bg-[#01796f] transition-transform nav flex items-center gap-2'>
+                <i className="fi fi-sr-user"></i>
+                <span>{User?.username}</span>
+              </button>
+              
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                <button 
+                  onClick={() => navigate('/profile')}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#01796f] hover:text-white w-full text-left"
+                >
+                  Profile
+                </button>
+                {User?.role === 'admin' && (
+                  <button 
+                    onClick={() => navigate('/admin/dashboard')}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#01796f] hover:text-white w-full text-left"
+                  >
+                    Admin Dashboard
+                  </button>
+                )}
+                {User?.role === 'collector' && (
+                  <button 
+                    onClick={() => navigate('/collector/dashboard')}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#01796f] hover:text-white w-full text-left"
+                  >
+                    Collector Dashboard
+                  </button>
+                )}
+                <button 
+                  onClick={handleLogout}
+                  className="block px-4 py-2 text-sm text-red-600 hover:bg-red-100 w-full text-left"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+
             <div className='flex w-fit h-fit justify-center items-center p-2 rounded-lg border-2'>
               <h1>500</h1>
               <BiCoinStack/>

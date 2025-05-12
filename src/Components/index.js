@@ -13,5 +13,7 @@ import Newnavbar from './Newnavbar';
 import CatCard from './CatCard';
 import Cartcard from './Cartcard';
 import InfoForm from './InfoForm';
+import ProtectedRoute from './ProtectedRoute';
+// import ProtectedAdminRoute from './ProtectedAdminRoute';
 
-export { Navbar,Cartcard,Newnavbar, Footer , Wrapper , Poster , Loading , About , Prodedure, Contact , Facilites, Background , CatCard, InfoForm};
+export { Navbar,Cartcard,Newnavbar, Footer , Wrapper , Poster , Loading , About , Prodedure, Contact , Facilites, Background , CatCard, InfoForm, ProtectedRoute};

@@ -22,7 +22,7 @@ const Facilites = ({ data , handleSearch}) => {
               <p className="font-montserrat font-semibold ">{item?.Name_Address}</p>
               <h2 className="font-montserrat font-bold mt-2 ">Capacity : {item?.Installed_Capacity_Metric_Tons_per_Annum_MTA}</h2>
               <button
-              className="hover:bg-[#ff5757] mt-[2vh] hover:scale-105 shadow-3xl transition-transform  font-montserrat font-semibold p-2 rounded-lg  w-fit"
+              className="hover:bg-emerald-500 mt-[2vh] hover:scale-105 shadow-3xl transition-transform  font-montserrat font-semibold p-2 rounded-lg  w-fit"
               onClick={()=>{handleSearch}}
             >
               Go

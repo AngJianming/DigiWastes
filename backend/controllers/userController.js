@@ -14,15 +14,15 @@ const generateToken = (id) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
-
-    if (user && (await user.matchPassword(password))) {
+    const user = await User.findOne({ email });    if (user && (await user.matchPassword(password))) {
       res.json({
         message: "Authentication successful",
         user: {
           _id: user._id,
           username: user.username,
           email: user.email,
+          role: user.role,
+          profile: user.profile,
           token: generateToken(user._id),
         },
       });
@@ -37,9 +37,14 @@ export const loginUser = async (req, res) => {
 // @desc    Register a new user
 // @route   POST /api/users/signup
 // @access  Public
-export const registerUser = async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
+export const registerUser = async (req, res) => {  try {
+    const { username, email, password, role = 'user' } = req.body;
+
+    // Validate role
+    if (!['user', 'admin', 'collector'].includes(role)) {
+      res.status(400).json({ message: 'Invalid role specified' });
+      return;
+    }
 
     const userExists = await User.findOne({ $or: [{ email }, { username }] });
 

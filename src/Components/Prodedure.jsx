@@ -37,7 +37,7 @@ const Prodedure = () => {
             <line
               x1="0" // X-coordinate of the starting point
               y1="100" // Y-coordinate of the starting point
-              x2="80vw" // X-coordinate of the ending point
+              x2="60vw" // X-coordinate of the ending point
               y2="100" // Y-coordinate of the ending point
               stroke="#01796f" // Stroke color
               strokeWidth="5" // Stroke width

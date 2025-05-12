@@ -1,20 +1,79 @@
-import React, { useEffect, useState } from "react";
-import mapboxgl, { Marker } from "mapbox-gl";
-// import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import polyline from "@mapbox/polyline";
+import React, { useEffect, useState, useCallback, useRef } from "react";
+import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import { useContext } from "react";
 import Context from "../context/Context";
 import { Wrapper, Facilites } from "../Components";
 import { useParams } from "react-router-dom";
-import { set } from "mongoose";
+
+
+const market = [
+  {
+    id: 1,
+    name: "Reverse-Vending Machine 1 (APU Main Campus)",
+    position: { lat: 3.055274, lng: 101.700643 }, // APU main entrance
+  },
+  {
+    id: 2,
+    name: "Reverse-Vending Machine 2 (Fortune Park)",
+    position: { lat: 3.051472, lng: 101.701831 }, // ~600m south of APU, near Fortune Park
+  },
+  {
+    id: 3,
+    name: "Reverse-Vending Machine 3 (The Arc)",
+    position: { lat: 3.059583, lng: 101.702147 }, // ~700m north of APU, near The Arc
+  },
+  {
+    id: 4,
+    name: "Reverse-Vending Machine 4 (Vista Shop)",
+    position: { lat: 3.054891, lng: 101.695912 }, // ~550m west of APU, near Vista Shop
+  },
+  {
+    id: 5,
+    name: "Reverse-Vending Machine 5 (LRT Station)",
+    position: { lat: 3.057813, lng: 101.704568 }, // ~650m northeast of APU, near LRT
+  }
+]
 
 const SearchMap = () => {
   const { Location, Locationstate, facdata, fetcheddata } = useContext(Context);
-  const [map, setmap] = useState(null);
-  const [coordinates, setCoordinates] = useState([101.700643, 3.055274]); // APU coordinates
-  const [marker, setmarker] = useState(null);
   const [searchaddress, setsearchaddress] = useState("");
-  const [initaddress, setinitaddress] = useState("");
+  const [activeMarker, setActiveMarker] = useState(null);
+  
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+  });
+
+  const handleActiveMarker = (marker) => {
+    if (marker === activeMarker) {
+      return setActiveMarker(null);
+    }
+    setActiveMarker(marker);
+  };
+
+  const mapRef = useRef();
+  const center = { lat: 3.055274, lng: 101.700643 }; // APU coordinates
+
+  const options = {
+    disableDefaultUI: true,
+    zoomControl: true,
+    styles: [
+      {
+        featureType: "all",
+        elementType: "geometry",
+        stylers: [{ color: "#242f3e" }]
+      },
+      {
+        featureType: "all",
+        elementType: "labels.text.stroke",
+        stylers: [{ color: "#242f3e" }]
+      },
+      {
+        featureType: "all",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#746855" }]
+      }
+    ]
+  };
 
   // Create a function to initialize the map
   const initializeMap = (coordinates1) => {
@@ -224,25 +283,37 @@ const SearchMap = () => {
     SetAddressMarker(Location ? Location : "Bhopal");
   }, []);
 
+  if (!isLoaded) return <div>Loading...</div>;
+
   return (
     <Wrapper>
-      <div className="relative mt-[2vh]">
-        <div id="map" className="h-[70vh] w-full rounded-xl" />
-        <div className="absolute top-0 flex gap-[1vh] justify-between items-center p-4">
+      <div className="flex flex-col items-center justify-center gap-y-[10px] bg-[#222222] min-h-screen">
+        <div className="relative w-[80%] mb-8">
           <input
             type="text"
-            className="w-full mt-2 mx-[2vh] rounded-lg text-[#F9F6EE] p-4 font-montserrat border-2 font-medium bg-[#222222]"
-            onChange={(e) => {
-              setsearchaddress(e.target.value);
-            }}
+            className="w-full px-4 py-3 rounded-lg text-[#F9F6EE] font-montserrat border-2 border-[#333] font-medium bg-[#222222] focus:border-emerald-500 focus:outline-none transition-colors"
+            onChange={(e) => setsearchaddress(e.target.value)}
             placeholder="Enter Your Location"
           />
           <button
-            className="hover:bg-[#ff5757] h-fit mt-2 hover:scale-105 shadow-3xl transition-transform  font-montserrat font-semibold p-4 rounded-lg  w-fit"
-            onClick={handleSearch}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[#454545] hover:bg-emerald-500 px-6 py-2 rounded-lg font-montserrat font-semibold transition-all duration-300 hover:scale-105"
+            onClick={() => {}}
           >
             Search
           </button>
+        </div>
+        
+        <div className="w-[80%] h-[60vh] rounded-xl overflow-hidden shadow-3xl">
+          <GoogleMap
+            zoom={15}
+            center={center}
+            mapContainerClassName="w-full h-full rounded-xl"
+            options={options}
+            onLoad={map => {
+              mapRef.current = map;
+            }}
+          >
+          </GoogleMap>
         </div>
       </div>
       {fetcheddata.length > 0 && (
@@ -262,7 +333,7 @@ const SearchMap = () => {
                     {item?.Installed_Capacity_Metric_Tons_per_Annum_MTA}
                   </h2>
                   <button
-                    className="hover:bg-[#ff5757] mt-[2vh] hover:scale-105 shadow-3xl transition-transform  font-montserrat font-semibold p-2 rounded-lg  w-fit"
+                    className="hover:bg-emerald-500 mt-[2vh] hover:scale-105 shadow-3xl transition-transform  font-montserrat font-semibold p-2 rounded-lg  w-fit"
                     onClick={() => {
                       handleSearch(item?.Name_Address);
                     }}

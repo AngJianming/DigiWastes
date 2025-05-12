@@ -1,18 +1,33 @@
-import Context from "./Context";
-import { useState , useEffect} from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { setAuthToken, clearAuth } from '../utils/auth';
+import api from '../utils/api';
+import Context from './Context';
 import mapboxgl from 'mapbox-gl';
 
 const State = (props) => {
-
-    const [isdark, setisdark] = useState(true)
-    const [isLoading, setisLoading] = useState(false)
+    const [isdark, setisdark] = useState(true);
+    const [isLoading, setisLoading] = useState(false);
     const [iscartupdated, setiscartupdated] = useState(false);
-    const [ispopup, setispopup] = useState(false)
-    const [islogin, setislogin] = useState(true);
-    const [Location, setLocation] = useState("")
-    const [Locationstate, setLocationstate] = useState("")
+    const [ispopup, setispopup] = useState(false);
+    const [islogin, setislogin] = useState(false);
+    const [Location, setLocation] = useState("");
+    const [Locationstate, setLocationstate] = useState("");
     const [User, setUser] = useState(null);
-    const [facdata, setfacdata] = useState([])
+    const [facdata, setfacdata] = useState([]);
+    const [authError, setAuthError] = useState(null);
+
+    // Initialize auth state from localStorage
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user');
+        if (token && storedUser) {
+            setislogin(true);
+            setUser(JSON.parse(storedUser));
+            // Set axios default header
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        }
+    }, []);
     const [fetcheddata, setfetcheddata] = useState([])
 
     const [category, setcategory] = useState([]);
@@ -137,8 +152,56 @@ const State = (props) => {
          fetchaddress();
     }, [Locationstate])
 
+    // Auth functions
+    const login = async (email, password) => {
+        try {
+            setisLoading(true);
+            const response = await api.post('/user/login', { email, password });
+            const { token, user } = response.data;
+            
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
+            
+            setUser(user);
+            setislogin(true);
+            setAuthError(null);
+
+            // Update axios default headers
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            
+            return user;
+        } catch (error) {
+            setAuthError(error.response?.data?.message || 'Login failed');
+            throw error;
+        } finally {
+            setisLoading(false);
+        }
+    };
+
+    const logout = () => {
+        clearAuth();
+        setUser(null);
+        setislogin(false);
+        setAuthError(null);
+    };
+
+    const value = {
+        isdark, setisdark,
+        isLoading, setisLoading,
+        iscartupdated, setiscartupdated,
+        ispopup, setispopup,
+        islogin, setislogin,
+        Location, setLocation,
+        Locationstate, setLocationstate,
+        User, setUser,
+        facdata, setfacdata,
+        authError,
+        login,
+        logout
+    };
+
   return (
-    <Context.Provider value={{isdark,facdata,iscartupdated , setiscartupdated, fetcheddata,Locationstate , Location , setLocation , User , setUser , setisdark , ispopup , setispopup ,islogin, setislogin , category}}>
+    <Context.Provider value={value}>
         {props.children}
     </Context.Provider>
   )
