@@ -12,10 +12,6 @@ import MarketPlace from './Components/MarketPlace';
 import ContactUs from './Pages/ContactUs';
 import AboutUs from './Pages/AboutUs';
 import EducationDocs from './Pages/EducationDocs';
-// import AdminDashboard from './AdminPages/AdminDashboard';
-// import AdminAnalytics from './AdminPages/AdminAnalytics';
-// import { AdminDashboard, AdminAnalytics } from './AdminPages';
-// import { ProtectedAdminRoute } from './Components/ProtectedRoutes';
 
 const App = () => {
   return (
@@ -37,45 +33,51 @@ const App = () => {
           
           {/* Protected Routes - require login */}
           <Route exact path="/DigiWaste/search" element={
-            <ProtectedRoute>
               <SearchMap/>
-            </ProtectedRoute>
           } />
+
           <Route exact path="/explore" element={
             <ProtectedRoute>
               <Explore/>
             </ProtectedRoute>
           } />
+          
           <Route exact path="/explore/:category" element={
             <ProtectedRoute>
               <SubExplore/>
             </ProtectedRoute>
           } />
+          
           <Route exact path="/explore/:category/:subcategory" element={
             <ProtectedRoute>
               <ItemExplore/>
             </ProtectedRoute>
           } />
+          
           <Route exact path="/pricepredict" element={
             <ProtectedRoute>
               <PricePred/>
             </ProtectedRoute>
           } />
+          
           <Route exact path="/cart" element={
             <ProtectedRoute>
               <Cart/>
             </ProtectedRoute>
           } />
+          
           <Route exact path="/profile" element={
             <ProtectedRoute>
               <Profile/>
             </ProtectedRoute>
           } />
+          
           <Route path="/market" element={
             <ProtectedRoute>
               <MarketPlace />
             </ProtectedRoute>
           } />
+          
           <Route path="DigiWaste/market" element={
             <ProtectedRoute>
               <MarketPlace />

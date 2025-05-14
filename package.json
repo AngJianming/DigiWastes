@@ -8,14 +8,28 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "vercel --prod --yes"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@flaticon/flaticon-uicons": "^2.4.0",
+    "@fullcalendar/core": "^6.1.17",
+    "@fullcalendar/daygrid": "^6.1.17",
+    "@fullcalendar/interaction": "^6.1.17",
+    "@fullcalendar/list": "^6.1.17",
+    "@fullcalendar/react": "^6.1.17",
+    "@fullcalendar/timegrid": "^6.1.17",
     "@mapbox/polyline": "^1.2.0",
+    "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.0.2",
+    "@mui/x-data-grid": "^8.3.1",
+    "@nivo/bar": "^0.96.0",
+    "@nivo/core": "^0.96.0",
+    "@nivo/geo": "^0.96.0",
+    "@nivo/line": "^0.96.0",
+    "@nivo/pie": "^0.96.0",
     "@react-google-maps/api": "^2.20.6",
     "@reduxjs/toolkit": "^2.7.0",
     "@testing-library/dom": "^10.4.0",
@@ -26,10 +40,12 @@
     "body-parser": "^1.20.2",
     "bootstrap": "^5.3.6",
     "chart.js": "^4.4.9",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-rate-limit": "^6.11.0",
+    "formik": "^2.4.6",
     "fs": "^0.0.1-security",
     "gsap": "^3.12.2",
     "leaflet": "^1.9.4",
@@ -47,6 +63,7 @@
     "react-dom": "^19.0.0-rc.1",
     "react-icons": "^4.11.0",
     "react-leaflet": "^5.0.0",
+    "react-pro-sidebar": "^0.7.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.15.0",
     "react-select": "^5.10.1",
@@ -54,7 +71,9 @@
     "redux": "^5.0.1",
     "slug": "^8.2.3",
     "slugify": "^1.6.6",
-    "web-vitals": "^5.0.0"
+    "vercel": "^41.0.2",
+    "web-vitals": "^5.0.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@types/mapbox-gl": "^2.7.13",
@@ -73,6 +92,11 @@
     "webpack-cli": "^5.1.4"
   },
   "overrides": {
-    "esbuild": "0.25.0"
+    "esbuild": "0.25.0",
+    "@vercel/node": "^1.14.0",
+    "@vercel/remix-builder": {
+      "path-to-regexp": "8.2.0"
+    },
+    "undici": "7.9.0"
   }
 }

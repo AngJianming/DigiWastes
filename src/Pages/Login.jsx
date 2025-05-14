@@ -42,7 +42,15 @@ const Login = () => {
       try {
         setloading(true);
         const res = await fetch(
-          "https://ewfl-backend-hemant2335.vercel.app/user/login",
+          '/api/user/login',
+          {
+            // "https://ewfl-backend-hemant2335.vercel.app/user/login",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: Email, password: Password }),
+          },
           {
             method: "POST",
             headers: {
@@ -59,7 +67,7 @@ const Login = () => {
           sessionStorage.setItem("user", data?.user?._id);
           // Check if user is admin
           if (data.user.isAdmin) {
-            navigate("/admin/dashboard"); // Navigate to admin dashboard
+            navigate("/DigiWastes/admin"); // Navigate to admin dashboard
           } else {
             navigate("/"); // Navigate to regular user home
           }
@@ -78,8 +86,7 @@ const Login = () => {
     } else {
       try {
         setloading(true);
-        const res = await fetch(
-          "https://ewfl-backend-hemant2335.vercel.app/user/signup",
+        const res = await fetch("",
           {
             method: "POST",
             headers: {
@@ -94,10 +101,14 @@ const Login = () => {
         if (data?.message === "User created successfully") {
           alert("User Created Successfully")
           setislogin(true)
-        } else {
+        } 
+        
+        else {
           alert("Username or Email already exists");
         }
-      } catch (error) {
+      } 
+      
+      catch (error) {
         setloading(false);
         alert("Username or Email already exists");
       }
