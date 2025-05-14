@@ -12,8 +12,8 @@ import MarketPlace from './Components/MarketPlace';
 import ContactUs from './Pages/ContactUs';
 import AboutUs from './Pages/AboutUs';
 import EducationDocs from './Pages/EducationDocs';
-import AdminDashboard from './AdminPages/AdminDashboard';
-import AdminAnalytics from './AdminPages/AdminAnalytics';
+// import AdminDashboard from './AdminPages/AdminDashboard';
+// import AdminAnalytics from './AdminPages/AdminAnalytics';
 // import { AdminDashboard, AdminAnalytics } from './AdminPages';
 // import { ProtectedAdminRoute } from './Components/ProtectedRoutes';
 
@@ -82,17 +82,7 @@ const App = () => {
             </ProtectedRoute>
           } />
 
-          {/* Admin Routes */}
-          <Route path="/admin/dashboard" element={
-            <ProtectedRoute requiredRole="admin">
-              <AdminDashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin/analytics" element={
-            <ProtectedRoute requiredRole="admin">
-              <AdminAnalytics />
-            </ProtectedRoute>
-          } />
+
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="DigiWaste/aboutus" element={<AboutUs />} />
           <Route path="/education" element={<EducationDocs />} />
@@ -101,26 +91,6 @@ const App = () => {
           <Route path="DigiWaste/contact" element={<ContactUs />} />
           <Route path="/sell" element={<InfoForm />} />
           <Route path="DigiWaste/sell" element={<InfoForm />} />
-          {/* <Route path="/" element={<DashboardPage/>} /> */}
-          {/* <Route path="/analytics" element={<AnalyticsPage/>} /> */}
-
-          {/* Admin Routes */}
-          {/* <Route 
-            path="/admin/dashboard" 
-            element={
-              <ProtectedAdminRoute>
-                <AdminDashboard />
-              </ProtectedAdminRoute>
-            } 
-          />
-          <Route 
-            path="/admin/analytics" 
-            element={
-              <ProtectedAdminRoute>
-                <AdminAnalytics />
-              </ProtectedAdminRoute>
-            } 
-          /> */}
         </Routes>
         <Footer/>
       </Router>
