@@ -38,7 +38,7 @@ const State = (props) => {
 
   const fetchcategory = async () => {
     const res = await fetch(
-      "https://ewfl-backend-hemant2335.vercel.app/edevice/categories",
+      "",
       {
         method: "GET",
         headers: {
