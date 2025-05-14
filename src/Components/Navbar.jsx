@@ -68,6 +68,13 @@ const Navbar = () => {
               <a>About</a>
             </li>
             <li
+              className="font-semibold font-montserrat  hover:text-[#01796f] cursor-pointer nav"
+              onClick={() => navigate("DigiWastes/admin")}
+              
+            >
+              <a>Admin</a>
+            </li>
+            <li
               className="font-semibold font-montserrat hover:text-[#01796f] cursor-pointer nav"
               onClick={() => navigate("/education")}
               // {()=>document.getElementById("contact").scrollIntoView({behavior:"smooth"})}

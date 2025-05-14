@@ -22,7 +22,7 @@ const CatCard = ({ name, link, cardid }) => {
   const addtocart = async () => {
     console.log(cardid, sessionStorage.getItem('user'));
     try {
-      const response = await fetch('https://ewfl-backend-hemant2335.vercel.app/user/updatecartdata', {
+      const response = await fetch('', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

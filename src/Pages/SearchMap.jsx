@@ -3,7 +3,6 @@ import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from '@react-google-ma
 import { useContext } from "react";
 import Context from "../context/Context";
 import { Wrapper, Facilites } from "../Components";
-import { useParams } from "react-router-dom";
 
 
 const market = [
@@ -287,6 +286,7 @@ const SearchMap = () => {
 
   return (
     <Wrapper>
+      <h1>Google Maps Reverse-vending Machine locator</h1>
       <div className="flex flex-col items-center justify-center gap-y-[10px] bg-[#222222] min-h-screen">
         <div className="relative w-[80%] mb-8">
           <input
