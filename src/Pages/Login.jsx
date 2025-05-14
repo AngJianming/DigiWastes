@@ -44,7 +44,6 @@ const Login = () => {
         const res = await fetch(
           '/api/user/login',
           {
-            // "https://ewfl-backend-hemant2335.vercel.app/user/login",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
