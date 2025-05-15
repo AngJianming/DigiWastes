@@ -1,21 +1,18 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import poster from "../assets/Login_page/postergif.gif";
 import posterlight from "../assets/Login_page/posterlightgif.gif";
-import { useContext } from "react";
 import gsap from "gsap";
 import Context from "../context/Context";
-import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Wrapper , Loading} from "../Components";
+import { Wrapper, Loading } from "../Components";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-
-import { set } from "mongoose";
 
 const Login = () => {
-  const { isdark, islogin, setislogin, setUser } = useContext(Context);
+  const { isdark, setUser } = useContext(Context);
+  const [isLoginForm, setIsLoginForm] = useState(true); // New state for form toggle
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -26,234 +23,235 @@ const Login = () => {
     const user = localStorage.getItem('user');
     if (token && user) {
       setUser(JSON.parse(user));
-      setislogin(true);
       navigate('/');
     }
   }, []);
 
   useEffect(() => {
-    gsap.fromTo(".auth", {x:400 , opacity : 0},{x : 0 , opacity: 100 , duration : 2 , ease : "power3.out" , stagger : 0.25});
-  }, [islogin])
+    gsap.fromTo(".auth", 
+      { x: 400, opacity: 0 },
+      { x: 0, opacity: 100, duration: 2, ease: "power3.out", stagger: 0.25 }
+    );
+  }, [isLoginForm]);
 
   const login = async () => {
-    if (Email === "" || Password === "") {
+    if (!email || !password) {
       alert("Please fill all the fields");
-    } else {
-      try {
-        setloading(true);
-        const res = await fetch(
-          '/api/user/login',
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email: Email, password: Password }),
-          },
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email: Email, password: Password }),
-          }
-        );
+      return;
+    }
 
-        const data = await res.json();
-        setloading(false);
-        if (data?.message === "Authentication successful") {
-          setUser(data?.user);
-          sessionStorage.setItem("user", data?.user?._id);
-          // Check if user is admin
-          if (data.user.isAdmin) {
-            navigate("/DigiWastes/admin"); // Navigate to admin dashboard
-          } else {
-            navigate("/"); // Navigate to regular user home
-          }
-        } else {
-          alert("Invalid Credentials");
+    try {
+      setLoading(true);
+      const res = await fetch('/api/user/login', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      setLoading(false);      if (data?.message === "Authentication successful") {
+        const userData = { ...data.user };
+        if (data.user.isAdmin || data.user.role === 'admin') {
+          userData.role = 'admin';
         }
-      } catch (error) {
-        alert("Internal Server Error");
+        setUser(userData);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(userData));
+        
+        // Handle navigation based on user role and admin status
+        if (userData.role === 'admin') {
+          navigate("/admin/dashboard"); // Direct to dashboard page
+        } else if (userData.role === 'collector') {
+          navigate("/collector/dashboard");
+        } else {
+          navigate("/");
+        }
+      } else {
+        setError("Invalid credentials");
+        alert("Invalid Credentials");
       }
+    } catch (error) {
+      setLoading(false);
+      setError("Internal Server Error");
+      alert("Internal Server Error");
     }
   };
 
   const Register = async () => {
-    if (Email === "" || Password === "") {
+    if (!username || !email || !password) {
       alert("Please fill all the fields");
-    } else {
-      try {
-        setloading(true);
-        const res = await fetch("",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({username : Username ,email: Email, password: Password }),
-          }
-        );
-    
-        const data = await res.json();
-        setloading(false);
-        if (data?.message === "User created successfully") {
-          alert("User Created Successfully")
-          setislogin(true)
-        } 
-        
-        else {
-          alert("Username or Email already exists");
-        }
-      } 
-      
-      catch (error) {
-        setloading(false);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const res = await fetch("/api/user/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      const data = await res.json();
+      setLoading(false);
+
+      if (data?.message === "User created successfully") {
+        alert("User Created Successfully");
+        // Reset form fields
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setIsLoginForm(true);
+      } else {
         alert("Username or Email already exists");
       }
+    } catch (error) {
+      setLoading(false);
+      alert("Registration failed. Please try again.");
     }
-    
-  }
+  };
 
   return (
     <Wrapper>
       {loading && <Loading />}
-      <div className="flex py-12 gap-x-10 md:px-[8vw] justify-end ">
+      <div className="flex py-12 gap-x-10 md:px-[8vw] justify-end">
         <div className="w-full h-full z-10 md:flex hidden items-center">
           <img 
             src={isdark ? poster : posterlight}
-            alt=""
+            alt="Login poster"
             className=""
           />
         </div>
 
-        {/* Login Cred */}
-        {islogin ? (<div className="auth p-[5vh] w-full h-fit flex flex-col items-center shadow-3xl p-3 rounded-xl">
-          <div>
-            <h1 className="mt-[5vh] font-montserrat font-bold text-3xl ">
-              Welcome back!
-            </h1>
-            <p className=" font-montserrat font-light text-center">
-              Please enter your details
-            </p>
-          </div>
+        {isLoginForm ? (
+          <div className="auth w-full h-fit flex flex-col items-center shadow-3xl p-[5vh] rounded-xl">
+            <div>
+              <h1 className="mt-[5vh] font-montserrat font-bold text-3xl">
+                Welcome back!
+              </h1>
+              <p className="font-montserrat font-light text-center">
+                Please enter your details
+              </p>
+            </div>
 
-          <div className="flex flex-col items-center mt-[8vh] gap-[2vh] md:w-fit  w-full ">
-            
-            <div className=" border-b-2 md:w-[60vh]  flex w-[45vh]">
-              <input
-                type="email"
-                className=" mt-2 w-full rounded-lg py-4 font-montserrat  font-medium  md:w-[60vh]"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                placeholder="Email"
-              />
+            <div className="flex flex-col items-center mt-[8vh] gap-[2vh] md:w-fit w-full">
+              <div className="border-b-2 md:w-[60vh] flex w-[45vh]">
+                <input
+                  type="email"
+                  className="mt-2 w-full rounded-lg py-4 font-montserrat font-medium md:w-[60vh]"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  placeholder="Email"
+                />
+              </div>
+              <div className="border-b-2 md:w-[60vh] flex w-[45vh]">
+                <input
+                  type="password"
+                  className="mt-2 w-full rounded-lg py-4 font-montserrat font-medium md:w-[60vh]"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  placeholder="Password"
+                />
+              </div>
+              <div className="w-full mt-[1vh] justify-between flex">
+                <button className="font-montserrat font-medium text-gray-600 hover:text-[#01796f] hover:scale-105 transition-transform">
+                  Forgot Password?
+                </button>
+                <button
+                  className="font-montserrat font-medium text-gray-600 hover:text-[#01796f] hover:scale-105 transition-transform"
+                  onClick={() => {
+                    setIsLoginForm(false);
+                    setEmail("");
+                    setPassword("");
+                  }}
+                >
+                  Not a User? Register
+                </button>
+              </div>
             </div>
-            <div className=" border-b-2 md:w-[60vh] flex w-[45vh]">
-              <input
-                type="password"
-                className=" mt-2 w-full rounded-lg  py-4 font-montserrat  font-medium md:w-[60vh]"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                placeholder="Password"
-              />
-            </div>
-            <div className="w-full mt-[1vh] justify-between flex">
+
+            <div className="flex flex-col gap-[2vh] w-full md:px-[20vh] px-[5vh] mt-[8vh]">
               <button
-                className=" font-montserrat font-medium text-gray-600  hover:text-[#01796f] hover:scale-105 transition-transform"
+                className="text-md w-full font-poppins font-medium shadow-3xl p-3 rounded-xl hover:bg-[#01796f] hover:scale-105 transition-transform"
+                onClick={login}
               >
-                Forgot Password?
+                Login
               </button>
+              <button className="text-md flex items-center justify-center gap-[2vh] w-full font-poppins font-medium shadow-3xl p-3 rounded-xl hover:bg-red-400 hover:scale-105 transition-transform">
+                <FcGoogle /> Log in with Google
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="auth w-full h-fit flex flex-col items-center shadow-3xl p-[5vh] rounded-xl">
+            <div>
+              <h1 className="mt-[5vh] text-center font-montserrat font-bold text-3xl">
+                Register with DigiWaste
+              </h1>
+              <p className="font-montserrat font-light text-center">
+                Please fill your details to register
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center mt-[8vh] gap-[2vh] md:w-fit w-full">
+              <div className="border-b-2 md:w-[60vh] flex w-[45vh]">
+                <input
+                  type="text"
+                  className="mt-2 w-full rounded-lg py-4 font-montserrat font-medium md:w-[60vh]"
+                  onChange={(e) => setUsername(e.target.value)}
+                  value={username}
+                  placeholder="Username"
+                />
+              </div>
+              <div className="border-b-2 md:w-[60vh] flex w-[45vh]">
+                <input
+                  type="email"
+                  className="mt-2 w-full rounded-lg py-4 font-montserrat font-medium md:w-[60vh]"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  placeholder="Email"
+                />
+              </div>
+              <div className="border-b-2 md:w-[60vh] flex w-[45vh]">
+                <input
+                  type="password"
+                  className="mt-2 w-full rounded-lg py-4 font-montserrat font-medium md:w-[60vh]"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  placeholder="Password"
+                />
+              </div>
+              <div className="w-full mt-[1vh]">
+                <button
+                  className="font-montserrat font-medium text-gray-600 hover:text-[#01796f] hover:scale-105 transition-transform"
+                  onClick={() => {
+                    setIsLoginForm(true);
+                    setUsername("");
+                    setEmail("");
+                    setPassword("");
+                  }}
+                >
+                  Already a User? Login
+                </button>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-[2vh] w-full md:px-[20vh] px-[5vh] mt-[8vh]">
               <button
-                className=" font-montserrat font-medium text-gray-600  hover:text-[#01796f] hover:scale-105 transition-transform"
-                onClick={() => {setislogin(false)}}
+                className="text-md w-full font-poppins font-medium shadow-3xl p-3 rounded-xl hover:bg-[#01796f] hover:scale-105 transition-transform"
+                onClick={Register}
               >
-                Not a User? Register
+                Sign up
+              </button>
+              <button className="text-md flex items-center justify-center gap-[2vh] w-full font-poppins font-medium shadow-3xl p-3 rounded-xl hover:bg-red-400 hover:scale-105 transition-transform">
+                <FcGoogle /> Log in with Google
               </button>
             </div>
           </div>
-
-          <div className="flex flex-col gap-[2vh] w-full md:px-[20vh] px-[5vh] mt-[8vh]">
-            <button
-              className="text-md w-full font-poppins font-medium  shadow-3xl p-3 rounded-xl hover:bg-[#01796f] hover:scale-105 transition-transform"
-              onClick={() => login()}
-            >
-              Login
-            </button>
-            <button className="text-md flex items-center justify-center gap-[2vh] w-full font-poppins font-medium  shadow-3xl p-3 rounded-xl hover:bg-red-400 hover:scale-105 transition-transform">
-              <FcGoogle /> Log in with Google
-            </button>
-          </div>
-        </div>) : (
-        
-        // Register
-        
-        <div className="auth w-full h-fit flex flex-col items-center shadow-3xl p-[5vh]  rounded-xl">
-          <div>
-            <h1 className="mt-[5vh] text-center font-montserrat font-bold text-3xl ">
-              Register with DigiWaste
-            </h1>
-            <p className=" font-montserrat font-light text-center">
-              Please fill your details to register
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center mt-[8vh] gap-[2vh] md:w-fit  w-full ">
-          <div className=" border-b-2 md:w-[60vh]  flex w-[45vh]">
-              <input
-                type="text"
-                className=" mt-2 w-full rounded-lg py-4 font-montserrat  font-medium  md:w-[60vh]"
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-                placeholder="Username"
-              />
-            </div>
-            <div className=" border-b-2 md:w-[60vh]  flex w-[45vh]">
-              <input
-                type="email"
-                className=" mt-2 w-full rounded-lg py-4 font-montserrat  font-medium  md:w-[60vh]"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                placeholder="Email"
-              />
-            </div>
-            <div className=" border-b-2 md:w-[60vh] flex w-[45vh]">
-              <input
-                type="password"
-                className=" mt-2 w-full rounded-lg  py-4 font-montserrat  font-medium md:w-[60vh]"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                placeholder="Password"
-              />
-            </div>
-            <div className="w-full mt-[1vh]">
-            <button
-                className=" font-montserrat font-medium text-gray-600  hover:text-[#01796f] hover:scale-105 transition-transform"
-                onClick={() => {setislogin(true)}}
-              >
-                Already a User?
-              </button>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-[2vh] w-full md:px-[20vh] px-[5vh] mt-[8vh]">
-            <button
-              className="text-md w-full font-poppins font-medium  shadow-3xl p-3 rounded-xl hover:bg-[#01796f] hover:scale-105 transition-transform"
-              onClick={() => Register()}
-            >
-              Sign up
-            </button>
-            <button className="text-md flex items-center justify-center gap-[2vh] w-full font-poppins font-medium  shadow-3xl p-3 rounded-xl hover:bg-red-400 hover:scale-105 transition-transform">
-              <FcGoogle /> Log in with Google
-            </button>
-          </div>
-        </div>)}
-        
+        )}
       </div>
     </Wrapper>
   );

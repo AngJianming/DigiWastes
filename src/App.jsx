@@ -30,12 +30,12 @@ const App = () => {
           <Route exact path="/register" element={<Login/>} />
           <Route exact path="/aboutus" element={<AboutUs />} />
           <Route exact path="/education" element={<EducationDocs />} />
-          
-          {/* Protected Routes - require login */}
           <Route exact path="/DigiWaste/search" element={
               <SearchMap/>
           } />
-
+          
+          
+          {/* Protected Routes - require login */}
           <Route exact path="/explore" element={
             <ProtectedRoute>
               <Explore/>

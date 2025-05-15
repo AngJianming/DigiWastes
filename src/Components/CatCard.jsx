@@ -52,14 +52,14 @@ const CatCard = ({ name, link, cardid }) => {
         <img src={selectedImage} alt={name} className="object-cover w-full h-full" />
       </div>
       <h1 className='text-md font-montserrat font-bold'>{name}</h1>
-      {link === "#" && (
+      {/* {link === "#" && (
         <button
           className="shadow-3xl font-medium border-2 font-poppins px-4 py-2 bg-[#222222] rounded-md hover:bg-red-400 transition-transform nav"
           onClick={!sessionStorage.getItem("user") ? () => navigate("/login") : () => addtocart()}
         >
           Add to cart
         </button>
-      )}
+      )} */}
     </div>
   )
 }
