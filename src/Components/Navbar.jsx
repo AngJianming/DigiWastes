@@ -67,13 +67,15 @@ const Navbar = () => {
             >
               <a>About</a>
             </li>
-            <li
+
+            {/* <li
               className="font-semibold font-montserrat  hover:text-[#01796f] cursor-pointer nav"
-              onClick={() => navigate("DigiWastes/admin")}
+              onClick={() => navigate("/DigiWaste/admin")}
               
             >
               <a>Admin</a>
-            </li>
+            </li> */}
+            
             <li
               className="font-semibold font-montserrat hover:text-[#01796f] cursor-pointer nav"
               onClick={() => navigate("/education")}
@@ -107,7 +109,7 @@ const Navbar = () => {
         
         </div>
         <div className='md:flex hidden gap-[5vh] items-center'>
-          {!Location ? (<h1 className=' font-montserrat font-bold text-red-400 flex items-center gap-[1vh]'><i class=""></i></h1>) : (<h1 className=' font-montserrat font-bold text-red-400 flex items-center gap-[1vh]'><i class="fi fi-rr-marker"></i>{Location}</h1>)}
+          {/* {!Location ? (<h1 className=' font-montserrat font-bold text-red-400 flex items-center gap-[1vh]'><i class=""></i></h1>) : (<h1 className=' font-montserrat font-bold text-red-400 flex items-center gap-[1vh]'><i class="fi fi-rr-marker"></i>{Location}</h1>)} */}
           
         {!islogin ? (
           <div className='md:flex hidden gap-[5vh]'>
@@ -165,10 +167,10 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className='flex w-fit h-fit justify-center items-center p-2 rounded-lg border-2'>
+            {/* <div className='flex w-fit h-fit justify-center items-center p-2 rounded-lg border-2'>
               <h1>500</h1>
               <BiCoinStack/>
-            </div>
+            </div> */}
           </div>
         )}
         </div>

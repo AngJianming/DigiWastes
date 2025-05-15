@@ -128,8 +128,7 @@ const State = (props) => {
     const sendstate = await Locationstate?.replace(/\s/g, "").toLowerCase();
     console.log(sendstate);
     const res = await fetch(
-      `https://ewfl-backend-hemant2335.vercel.app/ewaste/${
-        sendstate ? sendstate : "haryana"
+      `/api/ewaste/${sendstate || 'Selangor'
       }`
     );
     const data = await res.json();

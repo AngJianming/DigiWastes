@@ -83,7 +83,7 @@ const Homepage = () => {
             src={map}
             alt="Nav to locate reverse vending machine"
             className="h-[20vh] bg-cover bg-center rounded-xl cursor-pointer hover:scale-105 transition-transform"
-            onClick={() => navigate('/search')}
+            onClick={() => navigate('DigiWaste/search')}
           />
         </div>
       <About/>
