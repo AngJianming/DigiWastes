@@ -33,7 +33,6 @@ const Login = () => {
       { x: 0, opacity: 100, duration: 2, ease: "power3.out", stagger: 0.25 }
     );
   }, [isLoginForm]);
-
   const login = async () => {
     if (!email || !password) {
       alert("Please fill all the fields");
@@ -42,16 +41,26 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const res = await fetch('/api/user/login', {
+      const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      console.log('Attempting login with:', { email }); // Debug log
+      
+      const res = await fetch(`${baseURL}/api/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: 'include'
       });
 
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || 'Login failed');
+      }
+
       const data = await res.json();
-      setLoading(false);      if (data?.message === "Authentication successful") {
+      console.log('Login response:', data); // Debug log
+      setLoading(false);if (data?.message === "Authentication successful") {
         const userData = { ...data.user };
         if (data.user.isAdmin || data.user.role === 'admin') {
           userData.role = 'admin';
@@ -71,11 +80,11 @@ const Login = () => {
       } else {
         setError("Invalid credentials");
         alert("Invalid Credentials");
-      }
-    } catch (error) {
+      }    } catch (error) {
       setLoading(false);
-      setError("Internal Server Error");
-      alert("Internal Server Error");
+      console.error('Login error:', error); // Debug log
+      setError(error.message || "Internal Server Error");
+      alert(error.message || "Internal Server Error");
     }
   };
 
