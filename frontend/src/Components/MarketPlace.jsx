@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
-import { Wrapper } from '../Components';
+import { Wrapper } from '.';
 import { BiSearch, BiHeart } from 'react-icons/bi';
 import { FiFilter } from 'react-icons/fi';
 
