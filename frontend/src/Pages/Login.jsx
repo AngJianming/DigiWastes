@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
 import poster from "../assets/Login_page/postergif.gif";
 import posterlight from "../assets/Login_page/posterlightgif.gif";
 import gsap from "gsap";
@@ -32,8 +33,7 @@ const Login = () => {
       { x: 400, opacity: 0 },
       { x: 0, opacity: 100, duration: 2, ease: "power3.out", stagger: 0.25 }
     );
-  }, [isLoginForm]);
-  const login = async () => {
+  }, [isLoginForm]);  const login = async () => {
     if (!email || !password) {
       alert("Please fill all the fields");
       return;
@@ -44,23 +44,23 @@ const Login = () => {
       const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       console.log('Attempting login with:', { email }); // Debug log
       
-      const res = await fetch(`${baseURL}/api/user/login`, {
-        method: "POST",
+      // Create axios instance with default config
+      const axiosInstance = axios.create({
+        baseURL,
+        withCredentials: true,
         headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-        credentials: 'include'
+          'Content-Type': 'application/json'
+        }
       });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || 'Login failed');
-      }
-
-      const data = await res.json();
+      
+      const res = await axiosInstance.post('/api/user/login', {
+        email,
+        password
+      });      const { data } = res;
       console.log('Login response:', data); // Debug log
-      setLoading(false);if (data?.message === "Authentication successful") {
+      setLoading(false);
+      
+      if (data?.message === "Authentication successful") {
         const userData = { ...data.user };
         if (data.user.isAdmin || data.user.role === 'admin') {
           userData.role = 'admin';
@@ -82,9 +82,10 @@ const Login = () => {
         alert("Invalid Credentials");
       }    } catch (error) {
       setLoading(false);
-      console.error('Login error:', error); // Debug log
-      setError(error.message || "Internal Server Error");
-      alert(error.message || "Internal Server Error");
+      console.error('Login error:', error.response?.data || error); // Debug log
+      const errorMessage = error.response?.data?.message || error.message || "Internal Server Error";
+      setError(errorMessage);
+      alert(errorMessage);
     }
   };
 
